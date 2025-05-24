@@ -12,7 +12,8 @@
             "scaleInEditor": 2.97
         },
         "#MonoChrome-TileSet": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 2.3978
         },
         "/Users/alfredobarragan/Desktop/CMPM 120/Week 6/S5-StarterPlatform/StarterPlatformer/assets/platformer-level-1.tmj": {
             "scale": 1.52,
