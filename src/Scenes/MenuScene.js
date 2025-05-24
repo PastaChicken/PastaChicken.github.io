@@ -10,11 +10,15 @@ class MenuScene extends Phaser.Scene{
 
         this.keyEnter = this.input.keyboard.addKey("ENTER");
 
-        this.titleText = this.add.text(20, 50, "Press ENTER to Start", {
+        this.titleText = this.add.text(500, 400, "Press ENTER to Start", {
             fontSize:72,
         });
 
-        this.userHelp = this.add.text(100, 400, "Press Space to shoot!", {
+        this.userHelp = this.add.text(100, 300, "Tutorial: Use Arrow Keys to move", {
+            fontSize:32,
+        });
+
+        this.userHelp = this.add.text(450, 600, "Press E at\n checkpoint", {
             fontSize:32,
         });
 
@@ -29,7 +33,8 @@ class MenuScene extends Phaser.Scene{
 
     update() {
         if(Phaser.Input.Keyboard.JustDown(this.keyEnter)) {
-            this.scene.start("duckScene");
+            this.scene.start("platformerScene");
         }
+        
     }
 }
