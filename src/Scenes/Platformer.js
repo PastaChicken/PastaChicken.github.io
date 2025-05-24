@@ -14,6 +14,7 @@ class Platformer extends Phaser.Scene {
         this.jumpJuice;
         this.endZone = false;
         this.keyE;
+        this.score = 0;
 
         
     }
@@ -96,6 +97,7 @@ class Platformer extends Phaser.Scene {
             scale: 2.0,
         });
 
+        
     
         this.physics.world.enable(this.endGoal1, Phaser.Physics.Arcade.STATIC_BODY);
         this.physics.world.enable(this.endGoal2, Phaser.Physics.Arcade.STATIC_BODY);
@@ -108,7 +110,44 @@ class Platformer extends Phaser.Scene {
 
         this.arrGroup = [this.endGoalGroup, this.endGoalGroup2, this.endGoalGroup3];
 
-        //======================================================================
+        //========================Gems================================
+
+        this.gems = this.map.createFromObjects("Objects", {
+            name: "Gems",
+            key: "monoChrome_sheet",
+            frame: 62
+        });
+
+
+        this.gemGroup = this.add.group(this.gems);
+
+        this.physics.world.enable(this.gemGroup, Phaser.Physics.Arcade.STATIC_BODY);
+
+
+        this.gemSparkle = this.add.particles(0, 0, "kenny-particles", {
+
+            frame: { frames: ['star_01.png','star_02.png','star_03.png','star_04.png','star_05.png','star_06.png','star_07.png','star_08.png', 'star_09.png'], cycle: true},
+            scale: 0.1,
+            lifespan: 100,
+            //advance: 8,
+            delay: 50,
+            random: false,
+            //speed: 150,
+            duration: 500,
+            quality: 8,
+            blendMode: 'ADD',
+            frequency: 50,
+
+
+            alpha: {start:1, end: 0.5}
+           })
+
+           this.gemSparkle.stop();
+    
+
+        //=========================================================
+
+       
 
         // set up Phaser-provided cursor key input
         cursors = this.input.keyboard.createCursorKeys();
@@ -136,7 +175,14 @@ class Platformer extends Phaser.Scene {
         
 
         
-      
+        this.physics.add.overlap(my.sprite.player.getPlayer()
+        , this.gemGroup, (obj1, obj2) => {
+            obj2.destroy(); // gem
+            this.addScore(); //function to add to score value
+            this.gemSparkle.startFollow(obj2, my.sprite.player.getPlayer().displayWidth/2-10, my.sprite.player.getPlayer().displayHeight/2-5, false);
+            this.gemSparkle.start();
+
+        });
 
 
         // debug key listener (assigned to D key) 
@@ -158,8 +204,16 @@ class Platformer extends Phaser.Scene {
 
         window.scene = this;
 
+        this.titleText = this.add.text(475,300, "Score: ", {
+            fontSize: 16
+        
+        });
+
+        this.titleText.setScrollFactor(0);
 
 
+
+       
 
     }
 
@@ -172,12 +226,19 @@ class Platformer extends Phaser.Scene {
             this.scene.start("menuScene");
             this.endZone = false;
         }
-
+        
+//scoreText.scrollFactorX
     }
 
     //once player reaches the end of level (changed to false upon falling after getting checkpoint)
     setEndpoint() {
         this.endZone = true;
+    }
+
+    addScore() {
+        this.score += 1;
+        this.titleText.setText("Score: " + this.score);
+
     }
 
 

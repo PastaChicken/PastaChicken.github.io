@@ -129,6 +129,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             
         }
 
+        //double jump
         if(!this.player.body.blocked.down && this.doubleJump && Phaser.Input.Keyboard.JustDown(cursors.up)) {
             if(this.player.body.velocity.y < this.JUMP_VELOCITY) {
                 this.player.body.setVelocityY(this.JUMP_VELOCITY + this.player.body.velocity.y);
@@ -143,6 +144,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             scene.sound.play('jumpSFX');
 
         }
+
+        if(this.player.body.blocked.down) {
+            this.doubleJump = true;
+
+        }
         
 
 
@@ -153,6 +159,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.player.body.velocity.x = 0;
             this.player.body.velocity.y = 0;
             scene.endZone = false;
+            this.doubleJump = true;
+
 
         }
     }
