@@ -18,6 +18,7 @@ let config = {
     type: Phaser.CANVAS,
     render: {
         pixelArt: true  // prevent pixel art from getting blurred when scaled
+        
     },
     physics: {
         default: 'arcade',
@@ -31,11 +32,15 @@ let config = {
     },
     width: 1440,
     height: 900,
-    scene: [Load, MenuScene, Platformer]
+    scene: [Load, MenuScene, Platformer, Platformer2]
+    
 }
 
 var cursors;
 const SCALE = 2.0;
 var my = {sprite: {}, text: {}};
 
+
 const game = new Phaser.Game(config);
+game.forceSingleUpdate = false
+

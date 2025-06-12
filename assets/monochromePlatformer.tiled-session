@@ -80,11 +80,11 @@
             "expandedObjectLayers": [
                 2
             ],
-            "scale": 0.7595,
-            "selectedLayer": 0,
+            "scale": 0.3802,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 714.9440421329823,
-                "y": 228.43976300197497
+                "x": 689.1109942135719,
+                "y": 503.68227248816413
             }
         },
         "monochrome_level_1.tmj#MonoChrome-Tileset": {
@@ -99,7 +99,7 @@
     "map.lastUsedFormat": "json",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
-    "map.width": 100,
+    "map.width": 200,
     "openFiles": [
         "/Users/alfredobarragan/Desktop/CMPM 120/Week 6/S5-StarterPlatform/StarterPlatformer/assets/platformer-level-1.tmj"
     ],

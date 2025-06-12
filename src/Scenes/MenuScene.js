@@ -18,7 +18,11 @@ class MenuScene extends Phaser.Scene{
             fontSize:32,
         });
 
-        this.userHelp = this.add.text(450, 600, "Press E at\n checkpoint", {
+        this.userHelp1 = this.add.text(450, 600, "Press E at\n checkpoint", {
+            fontSize:32,
+        });
+
+        this.userHelp2 = this.add.text(800, 600, "Press C at\n to unalive\n the crows", {
             fontSize:32,
         });
 
