@@ -1,4 +1,3 @@
+# CMPM 121 D3 Project
 
-# PastaChicken.github.io
-
-This is the build that will run the game from my website (although it says PastaChicken) this submission was done by Alfredo Barragan
+This is the starting point for your CMPM 121 D3 project. Students should make sure to remove _this_ content from their README.md file and replace it with their own project documentation.

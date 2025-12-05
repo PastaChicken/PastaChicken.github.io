@@ -1,0 +1,164 @@
+#controlPanel {
+  /* place the controls fixed at the bottom center of the viewport
+     and layout child elements horizontally so the status panel can sit
+     to the right of the controls. */
+  position: fixed;
+  left: 26%;
+  bottom: 5px;
+  transform: translateX(-50%);
+  padding: 0.4rem;
+  z-index: 1000;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+#statusPanel {
+  padding: 1rem;
+}
+
+#map {
+  width: 100%;
+  height: 80vh;
+}
+
+.leaflet-tooltip.cacheLabel {
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid #333;
+  border-radius: 2px;
+  padding: 2px 5px;
+  font-size: 12px;
+  color: #000;
+  font-weight: 700;
+  font-size: 0.9rem;
+  pointer-events: none; /* avoid interfering with clicks*/
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Make it obvious the map has keyboard focus so users know arrow keys will pan */
+#map:focus {
+  outline: 3px solid rgba(0, 123, 255, 0.45);
+  outline-offset: -3px;
+}
+
+/* Control panel UI for on-screen buttons */
+#controlPanel #controls {
+  background: rgba(255, 255, 255, 0.95);
+  /* border: 0px solid rgba(0, 0, 0, 0.12); */
+  padding: 0.6rem;
+  border-radius: 6px;
+  /* layout children left (keys) and right (help) horizontally */
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-width: 280px;
+  max-width: 480px;
+}
+
+#controlPanel h3 {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+.keys {
+  /* Grid layout: W centered above the A S D row */
+  display: grid;
+  grid-template-columns: repeat(3, 44px);
+  grid-auto-rows: 44px;
+  gap: 6px 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.keys .key {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* Place the W key in the center column (first child button) */
+.keys > button.key:first-child {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+/* Make the container holding A/S/D span all three columns and center its children */
+.keys > div {
+  grid-column: 1 / span 3;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.hint {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: #333;
+}
+
+/* Right-side scroll/navigation info */
+#controlPanel #controls .right {
+  min-width: 180px;
+}
+
+.scroll-info ul {
+  margin: 0;
+  padding-left: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
+/* Make the control panel stack vertically on narrow screens */
+@media (max-width: 420px) {
+  #controlPanel #controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  #controlPanel #controls .right {
+    min-width: unset;
+  }
+}
+
+/* Style the status panel so it appears as a compact box to the right
+   of the controls. */
+#statusPanel {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  min-width: 120px;
+  text-align: center;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  /* On smaller screens stack status below controls to avoid cramped layout */
+  #controlPanel {
+    flex-direction: column;
+  }
+  #statusPanel {
+    width: 100%;
+  }
+}
+
+/* Temporary helper to hide on-screen UI for mobile GPS testing.
+   Add `?hide_ui=1` or `?hide_ui=true` to the page URL to enable. */
+body.hide-ui-testing #controlPanel,
+body.hide-ui-testing #statusPanel,
+body.hide-ui-testing .leaflet-control-container,
+body.hide-ui-testing .leaflet-control-attribution {
+  display: none !important;
+}
+
+/* Ensure the map occupies full viewport height when UI is hidden */
+body.hide-ui-testing #map {
+  height: 100vh !important;
+}
